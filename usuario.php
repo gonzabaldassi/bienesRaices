@@ -8,6 +8,7 @@ $db = conectarDB();
 $email = "root@root.com";
 $password = "root";
 
+//Hasheamos la password
 $passwordHash = password_hash($password,PASSWORD_DEFAULT);
 
 
