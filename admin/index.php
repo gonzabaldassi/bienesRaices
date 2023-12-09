@@ -1,4 +1,11 @@
 <?php
+    require "../includes/funciones.php";
+
+    $auth = estaAutenticado();
+    if (!$auth) {
+        header('Location: /bienesraices/index.php');
+    }
+
     //Importar la conexion
     require '../includes/config/database.php';
     $db = conectarDB();
@@ -38,7 +45,7 @@
     }
 
     //Incluir template
-    require "../includes/funciones.php";
+    
     incluirTemplate('header');
 ?>
 

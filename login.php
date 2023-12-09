@@ -19,6 +19,41 @@
         if (!$pass) {
             $errores[]="El password es obligatorio";
         }
+
+        if (empty($errores)) {
+            //Controlar si el usuario existe o no
+            $query = "SELECT * FROM usuarios WHERE email='$email' ";
+
+            $resultado = mysqli_query($db, $query);
+
+            
+
+            if ($resultado->num_rows) { //Este if comprueba que haya resultados de una consulta a la db
+
+                //Obtenemos el usuario
+                $usuario = mysqli_fetch_assoc($resultado);
+
+                //Verificar si el password es correcto o no
+                $auth = password_verify($pass, $usuario['password']);
+
+                if ($auth) {
+                    //Guardar que el usuario fue autenticado
+                    session_start();
+
+                    //Llenar el arreglo de la sesión
+                    $_SESSION['usuario'] = $usuario['email'];
+                    $_SESSION['login'] = true;
+
+                    header('Location: /bienesraices/admin/index.php');
+
+                }else{
+                    $errores[] = "La contraseña ingresada no es correcta";
+                }
+                
+            } else {
+                $errores[] = "El usuario no existe";
+            }
+        }
     }
     
     

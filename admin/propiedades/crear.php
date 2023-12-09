@@ -1,4 +1,11 @@
 <?php
+    require "../../includes/funciones.php";
+
+    $auth = estaAutenticado();
+    if (!$auth) {
+        header('Location: /bienesraices/index.php');
+    }
+
     //DB
     require '../../includes/config/database.php';
     $db = conectarDB();
@@ -109,7 +116,6 @@
         }
     }
 
-    require "../../includes/funciones.php";
     incluirTemplate('header');
 ?>
 

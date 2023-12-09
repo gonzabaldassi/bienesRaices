@@ -1,4 +1,12 @@
 <?php
+    require "../../includes/funciones.php";
+
+    $auth = estaAutenticado();
+    if (!$auth) {
+        header('Location: /bienesraices/index.php');
+    }
+
+
     //Validar que el ID que viene en la URL sea valido
     $id = $_GET['id'];
     $id = filter_var($id, FILTER_VALIDATE_INT);
@@ -133,7 +141,7 @@
         }
     }
 
-    require "../../includes/funciones.php";
+    
     incluirTemplate('header');
 ?>
 
