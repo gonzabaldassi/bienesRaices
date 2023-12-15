@@ -8,7 +8,8 @@
     }
 
     //Importar la db
-    require 'includes/config/database.php';
+    require 'includes/app.php';
+    
     $db = conectarDB();
 
     //consultar
@@ -23,7 +24,7 @@
 
     $propiedad = mysqli_fetch_assoc($res);
 
-    require 'includes/funciones.php';
+    
     incluirTemplate('header');
 ?>
     <main class="contenedor seccion contenido-centrado">
