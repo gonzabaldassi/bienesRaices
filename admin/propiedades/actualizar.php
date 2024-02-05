@@ -1,10 +1,8 @@
 <?php
     require "../../includes/funciones.php";
 
-    $auth = estaAutenticado();
-    if (!$auth) {
-        header('Location: /bienesraices/index.php');
-    }
+    estaAutenticado();
+
 
 
     //Validar que el ID que viene en la URL sea valido

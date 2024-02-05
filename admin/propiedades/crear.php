@@ -1,13 +1,17 @@
 <?php
-    require "../../includes/funciones.php";
+    // Activa la visualización de errores
+    error_reporting(E_ALL);
+    ini_set('display_errors', 1);
 
-    $auth = estaAutenticado();
-    if (!$auth) {
-        header('Location: /bienesraices/index.php');
-    }
+    require "../../includes/app.php";
+
+    use App\Propiedad;
+    use Intervention\Image\ImageManagerStatic as Image;
+
+    estaAutenticado();
+    
 
     //DB
-    require '../../includes/config/database.php';
     $db = conectarDB();
 
     //Consultar para obtener los vendedores
@@ -15,7 +19,7 @@
     $res=mysqli_query($db,$query_vendedores);
 
     //Array con mensajes de errores
-    $errores = [];
+    $errores = Propiedad::getErrores();
 
     //Asignación de variables
     $titulo = '';
@@ -28,86 +32,47 @@
 
     //Ejecuta el código luego de que el user envía el form
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
-        //Asignación de variables
-        $titulo = mysqli_real_escape_string($db, $_POST['titulo']);
-        $precio = mysqli_real_escape_string($db, $_POST['precio']);
-        $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
-        $habitaciones = mysqli_real_escape_string($db, $_POST['habitaciones']);
-        $banios = mysqli_real_escape_string($db, $_POST['banios']);
-        $estacionamiento = mysqli_real_escape_string($db, $_POST['estacionamiento']);
-        $vendedores_id = mysqli_real_escape_string($db, $_POST['vendedores_id']);
-        $fechaCreacion = date('Y/m/d');
+        //Creacion de una nueva instancia
+        $propiedad = new Propiedad($_POST);
 
-        //Asignar files hacia una variable
-        $imagen = $_FILES['imagen'];
+        //*SUBIDA DE ARCHIVOS*
 
-        //Verificacion de errores
-        if (!$titulo){
-            $errores[] = 'Debes añadir un titulo';
+        //Generar nombre aleatorio para las imagenes
+        $nombreImg = md5(uniqid( rand(),true)); //Función que se usa pra hashear. Con uniqid hacemos que no se repita
+
+        //Setear la imagen
+     
+        //Realiza un resize a la imagen con Intervention
+        if ($_FILES['imagen']['tmp_name']) {
+            $image = Image::make($_FILES['imagen']['tmp_name'])->fit(800, 600);
+
+            //Seteamos el nombre de la imagen que creamos arriba
+            $propiedad->setImagen($nombreImg);
         }
 
-        if (!$precio) {
-            $errores[] = 'El Precio es obligatorio';
-        }
 
-        if (!$imagen['name'] || $imagen['error']) {
-            $errores[] = 'La imagen es obligatoria';
-        }
-
-        //Valdiar por tamaño 1mb maximo
-        $medida = 1000 * 1000;
-        if ($imagen['size']>$medida) {
-            $errores[] = 'La imagen es muy pesada';
-        }
-        
-        if (strlen($descripcion)<50) {
-            $errores[] = 'La descripción es obligatoria y debe tener al menos 50 caracteres';
-        }
-
-        if (!$habitaciones) {
-            $errores[] = 'El numero de habitaciones es obligatorio';
-        }
-
-        if (!$banios) {
-            $errores[] = 'El numero de banios es obligatorio';
-        }
-
-        if (!$estacionamiento) {
-            $errores[] = 'El numero de lugares de estacionamientos es obligatorio';
-        }
-
-        if (!$vendedores_id ) {
-            $errores[] = 'Debes seleccionar un vendedor';
-        }
-
+        $errores=$propiedad->validar();
 
         //Controlamos que no haya errores antes de insertar
         if (empty($errores)) {
 
-            //SUBIDA DE ARCHIVOS
 
-            //Crear carpeta
-            $carpetaImg = '../../imagenes';
-
-            if (!is_dir($carpetaImg)) {  //is_dir verifica si el directorio existe o no
-                mkdir($carpetaImg);      // comando para crear un directorio
+            //Crear la carpeta para subir las imagenes
+            if(!is_dir(CARPETA_IMAGENES)){
+                mkdir(CARPETA_IMAGENES);
             }
+       
 
-            //Generar nombre aleatorio para las imagenes
-            $nombreImg = md5(uniqid( rand(),true)); //Función que se usa pra hashear. Con uniqid hacemos que no se repita
+            //Guardamos la imagen en el servidor
+            $image->save(CARPETA_IMAGENES.$nombreImg);
 
-            //subir la imagen
-            move_uploaded_file($imagen['tmp_name'], $carpetaImg . "/".$nombreImg . ".jpg");  //$imagen['tmp_name'] --> imagen que está almacenada en el servidor
-            
 
-            //Insertar en la base de datos
-            $query = "INSERT INTO propiedades (titulo, precio, imagen, descripcion, habitaciones, banios, estacionamiento,fechaCreacion, vendedores_id) 
-                    VALUES ('$titulo', '$precio','$nombreImg', '$descripcion', '$habitaciones', '$banios', '$estacionamiento','$fechaCreacion', '$vendedores_id')" ;
+            //Guarda en la db
+            $resultado = $propiedad -> guardar();
 
-            //echo $query;
-            $resultado = mysqli_query($db, $query);
 
+
+            //Mensaje de exito o error
             if ($resultado) { 
                 //Redireccionar al usuario
                 header('Location: /bienesraices/admin/index.php?resultado=1');
