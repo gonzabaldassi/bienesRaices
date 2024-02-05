@@ -38,7 +38,7 @@
         //*SUBIDA DE ARCHIVOS*
 
         //Generar nombre aleatorio para las imagenes
-        $nombreImg = md5(uniqid( rand(),true)); //Función que se usa pra hashear. Con uniqid hacemos que no se repita
+        $nombreImg = md5(uniqid( rand(),true)) . ".jpg"; //Función que se usa pra hashear. Con uniqid hacemos que no se repita
 
         //Setear la imagen
      
