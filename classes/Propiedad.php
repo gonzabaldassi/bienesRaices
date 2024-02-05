@@ -135,4 +135,63 @@ class Propiedad{
 
         return self::$errores;
     }
+
+    //Lista toda las propiedades
+    public static function all(){
+        $query = "SELECT * FROM propiedades";
+        $resultado = self::consultarSQL($query);
+
+        return $resultado;
+
+    }
+
+    public static function consultarSQL($query){
+        //Consultar la db
+        $resultado = self::$db->query($query);
+
+        //Iterar los resultados y formatear el resultado de arreglo a objeto
+        $array = [];
+        while($registro = $resultado->fetch_assoc()){
+            $array[] = self::crearObjetos($registro);
+        }
+
+        //Liberar la memoria
+        $resultado-> free();
+
+        //Retornar los resultados ya formateados
+        return $array;
+    }
+
+    protected static function crearObjetos($registro){
+        $objeto = new self;
+
+        //Toma un arreglo de resultados y crea un objeto en memoria, que es un espejo de lo que hay en la db. Así funciona activeRecords
+        foreach ($registro as $key => $value) {
+            if (property_exists($objeto, $key)) {
+                $objeto->$key = $value;
+                
+            }
+        }
+
+        return $objeto;
+    }
+    //Getter del ID
+    public function getID(){
+        return $this->id;
+    }
+
+    //Getter del Titulo
+    public function getTitulo(){
+        return $this->titulo;
+    }
+
+    //Getter de la imagen
+    public function getImagen(){
+        return $this->imagen;
+    }
+
+    //Getter del precio
+    public function getPrecio(){
+        return $this->precio;
+    }
 }
