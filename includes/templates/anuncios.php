@@ -20,7 +20,7 @@
         <?php while($propiedad = mysqli_fetch_assoc($res)): ?>
         <div class="card">
 
-            <img loading="lazy" src="imagenes/<?php echo $propiedad['imagen'];?>.jpg" alt="anuncio de casa">
+            <img loading="lazy" src="imagenes/<?php echo $propiedad['imagen'];?>" alt="anuncio de casa">
 
 
             <div class="contenido-card">
