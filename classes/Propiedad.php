@@ -194,4 +194,19 @@ class Propiedad{
     public function getPrecio(){
         return $this->precio;
     }
+
+    public function getDescripcion(){
+        return $this->descripcion;
+    }
+
+    public function getEstacionamiento(){
+        return $this->estacionamiento;
+    }
+
+    public function getBanios(){
+        return $this->banios;
+    }
+    public function getHabitaciones(){
+        return $this->habitaciones;
+    }
 }
