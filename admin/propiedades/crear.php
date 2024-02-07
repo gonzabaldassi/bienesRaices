@@ -6,26 +6,24 @@
     require "../../includes/app.php";
 
     use App\Propiedad;
+    use App\Vendedor;
     use Intervention\Image\ImageManagerStatic as Image;
 
     estaAutenticado();
 
-    //DB
-    $db = conectarDB();
 
-    $propiedad = new Propiedad($_POST['propiedad']);
+    $propiedad = new Propiedad;
 
     //Consultar para obtener los vendedores
-    $query_vendedores="SELECT * FROM vendedores";
-    $res=mysqli_query($db,$query_vendedores);
-
+    $vendedores=Vendedor::all();
+    
     //Array con mensajes de errores
     $errores = Propiedad::getErrores();
 
     //Ejecuta el código luego de que el user envía el form
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         //Creacion de una nueva instancia
-        $propiedad = new Propiedad($_POST);
+        $propiedad = new Propiedad($_POST['propiedad']);
 
         //*SUBIDA DE ARCHIVOS*
 

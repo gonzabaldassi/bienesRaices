@@ -32,49 +32,4 @@ class Propiedad extends ActiveRecord{
         $this -> fechaCreacion = date('Y/m/d');
         $this -> vendedores_id = $args['vendedores_id'] ?? '';
     }
-
-    //Getter del ID
-    public function getID(){
-        return $this->id;
-    }
-
-    //Getter del Titulo
-    public function getTitulo(){
-        return $this->titulo;
-    }
-
-    //Getter de la imagen
-    public function getImagen(){
-        return $this->imagen;
-    }
-
-    //Getter del precio
-    public function getPrecio(){
-        return $this->precio;
-    }
-
-    //Getter de la descripcion
-    public function getDescripcion(){
-        return $this->descripcion;
-    }
-
-    //Getter del estacionamiento
-    public function getEstacionamiento(){
-        return $this->estacionamiento;
-    }
-
-    //Getter de los wc
-    public function getBanios(){
-        return $this->banios;
-    }
-    
-    //Getter de las habitaciones
-    public function getHabitaciones(){
-        return $this->habitaciones;
-    }
-
-    //Getter del id del vendedor
-    public function getVendedores(){
-        return $this->vendedores_id;
-    }
 }

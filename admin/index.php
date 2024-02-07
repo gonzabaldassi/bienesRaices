@@ -2,10 +2,13 @@
     require "../includes/app.php";
     estaAutenticado();
 
-    use App\Propiedad; 
+    use App\Propiedad;
+    use App\Vendedor;
 
     //Implementar un metodo para obtener todas las propiedades mediante activeRecords
     $propiedades = Propiedad::all();
+    $vendedores = Vendedor::all();
+
 
     //Muestra alerta
     $mensaje = $_GET['resultado'] ?? null;

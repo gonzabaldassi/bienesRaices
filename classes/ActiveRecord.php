@@ -14,16 +14,6 @@ class ActiveRecord{
     //Errores 
     protected static $errores = [];
 
-    public $id;
-    public $imagen;
-    public $titulo;
-    public $precio;
-    public $descripcion;
-    public $habitaciones;
-    public $banios;
-    public $estacionamiento;
-    public $creado;
-    public $vendedores_id;
     
     public function guardar(){
         if (!is_null($this->id)) {
