@@ -9,7 +9,6 @@
     use Intervention\Image\ImageManagerStatic as Image;
 
     estaAutenticado();
-    
 
     //DB
     $db = conectarDB();
@@ -22,7 +21,6 @@
 
     //Array con mensajes de errores
     $errores = Propiedad::getErrores();
-
 
     //Ejecuta el código luego de que el user envía el form
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {

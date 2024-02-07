@@ -71,7 +71,6 @@
         </form>
     </main>
 
-
-    <?php
-        incluirTemplate('footer');
-    ?>
+<?php
+    incluirTemplate('footer');
+?>

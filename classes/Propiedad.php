@@ -113,8 +113,8 @@ class Propiedad{
     //Definimos una funcion para crear un arreglo con los atributos y los datos del objeto, esto para luego poder realizar la sanitizacion
     public function atributos(){
         $atributos = [];
+        
         foreach(self::$columnasDB as $col){
-
             if ($col === 'id') continue;
             $atributos[$col] = $this -> $col; 
         }
@@ -162,7 +162,6 @@ class Propiedad{
     }
 
     public function validar(){
-        
         //Verificacion de errores
         if (!$this->titulo){
             self::$errores[] = 'Debes añadir un titulo';
@@ -207,6 +206,7 @@ class Propiedad{
         return $resultado;
 
     }
+
     //Buscar una propiedad por ID
     public static function find($id){
         $query = "SELECT * FROM propiedades WHERE id=$id";
@@ -214,6 +214,7 @@ class Propiedad{
         return array_shift($resultado);
     }
 
+    //Funcion para consultar la db y devolver un resultado como objeto
     public static function consultarSQL($query){
         //Consultar la db
         $resultado = self::$db->query($query);
@@ -237,13 +238,13 @@ class Propiedad{
         //Toma un arreglo de resultados y crea un objeto en memoria, que es un espejo de lo que hay en la db. Así funciona activeRecords
         foreach ($registro as $key => $value) {
             if (property_exists($objeto, $key)) {
-                $objeto->$key = $value;
-                
+                $objeto->$key = $value;        
             }
         }
 
         return $objeto;
     }
+
     //Getter del ID
     public function getID(){
         return $this->id;
@@ -264,22 +265,27 @@ class Propiedad{
         return $this->precio;
     }
 
+    //Getter de la descripcion
     public function getDescripcion(){
         return $this->descripcion;
     }
 
+    //Getter del estacionamiento
     public function getEstacionamiento(){
         return $this->estacionamiento;
     }
 
+    //Getter de los wc
     public function getBanios(){
         return $this->banios;
     }
     
+    //Getter de las habitaciones
     public function getHabitaciones(){
         return $this->habitaciones;
     }
 
+    //Getter del id del vendedor
     public function getVendedores(){
         return $this->vendedores_id;
     }

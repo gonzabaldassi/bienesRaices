@@ -7,7 +7,6 @@
     //Implementar un metodo para obtener todas las propiedades mediante activeRecords
     $propiedades = Propiedad::all();
 
-
     //Muestra alerta
     $mensaje = $_GET['resultado'] ?? null;
 
@@ -19,8 +18,6 @@
             $propiedad = Propiedad::find($id);
 
             $propiedad->eliminar();
-
-
         }
     }
 

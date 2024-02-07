@@ -26,8 +26,6 @@
 
             $resultado = mysqli_query($db, $query);
 
-            
-
             if ($resultado->num_rows) { //Este if comprueba que haya resultados de una consulta a la db
 
                 //Obtenemos el usuario
@@ -85,6 +83,6 @@
         </form>
     </main>
 
-    <?php
-        incluirTemplate('footer');
-    ?>
+<?php
+    incluirTemplate('footer');
+?>

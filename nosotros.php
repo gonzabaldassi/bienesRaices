@@ -61,7 +61,6 @@
         </div> <!--.iconos-nosotros-->
     </section>
 
-
-    <?php
-        incluirTemplate('footer');
-    ?>
+<?php
+    incluirTemplate('footer');
+?>

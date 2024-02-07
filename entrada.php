@@ -34,7 +34,6 @@
         </div>
     </main>
 
-
-    <?php
-        incluirTemplate('footer');
-    ?>
+<?php
+    incluirTemplate('footer');
+?>

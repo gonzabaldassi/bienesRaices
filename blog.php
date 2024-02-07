@@ -87,7 +87,6 @@
         </article><!--.entrada-blog-->
     </main>
 
-
-    <?php
-        incluirTemplate('footer');
-    ?>
+<?php
+    incluirTemplate('footer');
+?>

@@ -1,5 +1,4 @@
 <?php
-
 //Importar la conexión
 require 'includes/app.php';
 
@@ -11,7 +10,6 @@ $password = "root";
 
 //Hasheamos la password
 $passwordHash = password_hash($password,PASSWORD_DEFAULT);
-
 
 //Query para crear el usuario
 $query = "INSERT INTO usuarios (email,password) VALUES ('$email', '$passwordHash');";

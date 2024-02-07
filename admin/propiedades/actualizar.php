@@ -18,7 +18,6 @@
     //Consulta para los datos de la propiedad
     $propiedad= Propiedad::find($id);
 
-
     //Consultar para obtener los vendedores
     $query_vendedores="SELECT * FROM vendedores";
     $res=mysqli_query($db,$query_vendedores);
@@ -50,7 +49,6 @@
             $propiedad->setImagen($nombreImg);
         }
 
-
         //Controlamos que no haya errores antes de insertar
         if (empty($errores)) {
             //Almacenar la imagen
@@ -59,11 +57,9 @@
             //Update a la base de datos
              $propiedad ->guardar();
 
-
         }
     }
 
-    
     incluirTemplate('header');
 ?>
 

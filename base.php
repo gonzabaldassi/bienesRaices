@@ -7,6 +7,6 @@
         <h2>Titulo Página</h2>
     </main>
 
-    <?php
-        incluirTemplate('footer');
-    ?>
+<?php
+    incluirTemplate('footer');
+?>
