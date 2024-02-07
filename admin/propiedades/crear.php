@@ -44,34 +44,21 @@
             $propiedad->setImagen($nombreImg);
         }
 
-
         $errores=$propiedad->validar();
 
         //Controlamos que no haya errores antes de insertar
         if (empty($errores)) {
-
 
             //Crear la carpeta para subir las imagenes
             if(!is_dir(CARPETA_IMAGENES)){
                 mkdir(CARPETA_IMAGENES);
             }
        
-
             //Guardamos la imagen en el servidor
             $image->save(CARPETA_IMAGENES.$nombreImg);
 
-
             //Guarda en la db
-            $resultado = $propiedad -> guardar();
-
-
-
-            //Mensaje de exito o error
-            if ($resultado) { 
-                //Redireccionar al usuario
-                header('Location: /bienesraices/admin/index.php?resultado=1');
-            }
-
+            $propiedad -> guardar();
         }
     }
 
