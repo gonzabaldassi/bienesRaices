@@ -39,6 +39,41 @@ class Propiedad{
     }
 
     public function guardar(){
+        if (isset($this->id)) {
+            //Actualizar
+            $this->actualizar();
+        }else{
+            //Crear
+            $this->crear();
+        }
+    }
+
+    public function actualizar(){
+        //Sanitizar los datos
+        $atributos = $this -> sanitizarAtributos();
+        $valores = [];
+
+        //Mapeamos los atributos de la propiedad a una forma mas parecida a lo que se necesita para realizar un update, que sería clave-valor
+        foreach ($atributos as $key => $value) {
+            $valores[]="{$key}='{$value}'";
+        }
+
+        $query= "UPDATE propiedades SET ";
+        $query .= join(', ',$valores);
+        $query .= " WHERE id = '".self::$db->escape_string($this->id)."' ";
+        $query .= " LIMIT 1 ";
+        
+        $resultado = self::$db->query($query);
+        
+        
+        if ($resultado) { 
+            //Redireccionar al usuario
+            header('Location: /bienesraices/admin/index.php?resultado=2');
+        }
+
+    }
+
+    public function crear(){
 
         //Sanitizar los datos
         $atributos = $this -> sanitizarAtributos();
@@ -87,6 +122,16 @@ class Propiedad{
     //Subida de archivos
 
     public function setImagen($imagen){
+        //Elimina la imagen previa
+        if($this->id){
+            //Comprobamos si existe el archivo
+            $existeArchivo = file_exists(CARPETA_IMAGENES.$this->imagen);
+
+            if($existeArchivo){
+                unlink(CARPETA_IMAGENES.$this->imagen);
+            }
+        }
+
         //Asignamos al atributo imagen el nombre de la misma
         if ($imagen) {
             $this->imagen = $imagen;

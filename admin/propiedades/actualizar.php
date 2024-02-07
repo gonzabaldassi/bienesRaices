@@ -4,6 +4,7 @@
     estaAutenticado();
 
     Use App\Propiedad;
+    use Intervention\Image\ImageManagerStatic as Image;
 
     //Validar que el ID que viene en la URL sea valido
     $id = $_GET['id'];
@@ -23,7 +24,7 @@
     $res=mysqli_query($db,$query_vendedores);
 
     //Array con mensajes de errores
-    $errores = [];
+    $errores = Propiedad::getErrores();
 
     //Ejecuta el código luego de que el user envía el form
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -33,96 +34,31 @@
         $args=$_POST['propiedad'];
 
         // $args=$_POST['titulo'] ?? null;
-        // $args=$_POST['precio'] ?? null;
-        // $args=$_POST['descripcion'] ?? null;
-        // $args=$_POST['estacionamiento'] ?? null;
-        // $args=$_POST['banio'] ?? null;
-        // $args=$_POST['habitaciones'] ?? null;
-        // $args=$_POST['titulo'] ?? null;
 
         $propiedad->sincronizar($args);
-
-        //Asignar files hacia una variable
-        $imagen = $_FILES['propiedad']['imagen'];
-
-        //Verificacion de errores
-        if (!$titulo){
-            $errores[] = 'Debes añadir un titulo';
-        }
-
-        if (!$precio) {
-            $errores[] = 'El Precio es obligatorio';
-        }
-
-        //Valdiar por tamaño 1mb maximo
-        $medida = 1000 * 1000;
-        if ($imagen['size']>$medida) {
-            $errores[] = 'La imagen es muy pesada';
-        }
         
-        if (strlen($descripcion)<50) {
-            $errores[] = 'La descripción es obligatoria y debe tener al menos 50 caracteres';
-        }
+        //Validacion
+        $errores = $propiedad->validar();
 
-        if (!$habitaciones) {
-            $errores[] = 'El numero de habitaciones es obligatorio';
-        }
+        //Subida de archivos
+        //Generar nombre aleatorio para las imagenes
+        $nombreImg = md5(uniqid( rand(),true)) . ".jpg"; //Función que se usa pra hashear. Con uniqid hacemos que no se repita
+        if ($_FILES['propiedad']['tmp_name']['imagen']) {
+            $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800, 600);
 
-        if (!$banios) {
-            $errores[] = 'El numero de banios es obligatorio';
-        }
-
-        if (!$estacionamiento) {
-            $errores[] = 'El numero de lugares de estacionamientos es obligatorio';
-        }
-
-        if (!$vendedores_id ) {
-            $errores[] = 'Debes seleccionar un vendedor';
+            //Seteamos el nombre de la imagen que creamos arriba
+            $propiedad->setImagen($nombreImg);
         }
 
 
         //Controlamos que no haya errores antes de insertar
         if (empty($errores)) {
+            //Almacenar la imagen
+            $image->save(CARPETA_IMAGENES.$nombreImg);
 
-            //SUBIDA DE ARCHIVOS
+            //Update a la base de datos
+             $propiedad ->guardar();
 
-            //Crear carpeta
-            $carpetaImg = '../../imagenes';
-
-            if (!is_dir($carpetaImg)) {  //is_dir verifica si el directorio existe o no
-                mkdir($carpetaImg);      // comando para crear un directorio
-            }
-
-            $nombreImg = '';
-
-            //Condicional para verificar si se está agregando una nueva img o no
-            if ($imagen['name']) {
-                //Eliminar imagen previa
-                unlink($carpetaImg."/".$propiedad['imagen'].".jpg");
-
-                //Generar nombre aleatorio para las imagenes
-                $nombreImg = md5(uniqid( rand(),true)); //Función que se usa pra hashear. Con uniqid hacemos que no se repita
-
-                //subir la imagen
-                move_uploaded_file($imagen['tmp_name'], $carpetaImg . "/".$nombreImg . ".jpg");  //$imagen['tmp_name'] --> imagen que está almacenada en el servidor
-            
-            } else{
-
-                $nombreImg = $propiedad['imagen'];
-            }
-
-
-            //Insertar en la base de datos
-            $query = "UPDATE propiedades SET titulo = '$titulo',precio = '$precio',imagen='$nombreImg',
-            descripcion = '$descripcion', habitaciones = $habitaciones, banios = $banios, 
-            estacionamiento = $estacionamiento, vendedores_id = $vendedores_id WHERE id=$id" ;
-
-            $resultado = mysqli_query($db, $query);
-
-            if ($resultado) { 
-                //Redireccionar al usuario
-                header('Location: /bienesraices/admin/index.php?resultado=2');
-            }
 
         }
     }
