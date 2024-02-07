@@ -54,17 +54,17 @@
             <tbody> <!--Mostrar los resultados de la query -->
                 <?php foreach($propiedades as $propiedad): ?>
                 <tr>
-                    <td><?php echo $propiedad->getID(); ?></td>
-                    <td><?php echo $propiedad -> getTitulo(); ?></td>
-                    <td><img src="../imagenes/<?php echo $propiedad-> getImagen(); ?>" class="imagen-tabla"></td>
-                    <td>$ <?php echo $propiedad -> getPrecio(); ?> </td>
+                    <td><?php echo $propiedad->id; ?></td>
+                    <td><?php echo $propiedad -> titulo; ?></td>
+                    <td><img src="../imagenes/<?php echo $propiedad-> imagen; ?>" class="imagen-tabla"></td>
+                    <td>$ <?php echo $propiedad ->precio; ?> </td>
                     <td class="acciones">
                         <form method="POST" class="w-100">
-                            <input type="hidden" name="id" value="<?php echo $propiedad -> getID(); ?>">
+                            <input type="hidden" name="id" value="<?php echo $propiedad -> id; ?>">
                             <input type="submit" class="boton-rojo-block" value="Eliminar">
                         </form>
                         
-                        <a href="/bienesraices/admin/propiedades/actualizar.php?id=<?php echo $propiedad -> getID(); ?>" class="boton-amarillo-block">Actualizar</a>
+                        <a href="/bienesraices/admin/propiedades/actualizar.php?id=<?php echo $propiedad -> id; ?>" class="boton-amarillo-block">Actualizar</a>
                     </td>
                 </tr>
 
