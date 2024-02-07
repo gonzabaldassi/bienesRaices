@@ -27,19 +27,23 @@
 
     //Ejecuta el código luego de que el user envía el form
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
-        //Asignación de variables
-        $titulo = mysqli_real_escape_string($db, $_POST['titulo']);
-        $precio = mysqli_real_escape_string($db, $_POST['precio']);
-        $descripcion = mysqli_real_escape_string($db, $_POST['descripcion']);
-        $habitaciones = mysqli_real_escape_string($db, $_POST['habitaciones']);
-        $banios = mysqli_real_escape_string($db, $_POST['banios']);
-        $estacionamiento = mysqli_real_escape_string($db, $_POST['estacionamiento']);
-        $vendedores_id = mysqli_real_escape_string($db, $_POST['vendedores_id']);
-        $fechaCreacion = date('Y/m/d');
+
+        //Asignar los atributos
+        $args=[];
+        $args=$_POST['propiedad'];
+
+        // $args=$_POST['titulo'] ?? null;
+        // $args=$_POST['precio'] ?? null;
+        // $args=$_POST['descripcion'] ?? null;
+        // $args=$_POST['estacionamiento'] ?? null;
+        // $args=$_POST['banio'] ?? null;
+        // $args=$_POST['habitaciones'] ?? null;
+        // $args=$_POST['titulo'] ?? null;
+
+        $propiedad->sincronizar($args);
 
         //Asignar files hacia una variable
-        $imagen = $_FILES['imagen'];
+        $imagen = $_FILES['propiedad']['imagen'];
 
         //Verificacion de errores
         if (!$titulo){

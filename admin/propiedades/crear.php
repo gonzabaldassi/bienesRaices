@@ -14,7 +14,7 @@
     //DB
     $db = conectarDB();
 
-    $propiedad = new Propiedad();
+    $propiedad = new Propiedad($_POST['propiedad']);
 
     //Consultar para obtener los vendedores
     $query_vendedores="SELECT * FROM vendedores";
@@ -37,8 +37,8 @@
         //Setear la imagen
      
         //Realiza un resize a la imagen con Intervention
-        if ($_FILES['imagen']['tmp_name']) {
-            $image = Image::make($_FILES['imagen']['tmp_name'])->fit(800, 600);
+        if ($_FILES['propiedad']['tmp_name']['imagen']) {
+            $image = Image::make($_FILES['propiedad']['tmp_name']['imagen'])->fit(800, 600);
 
             //Seteamos el nombre de la imagen que creamos arriba
             $propiedad->setImagen($nombreImg);

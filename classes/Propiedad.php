@@ -212,10 +212,23 @@ class Propiedad{
     public function getBanios(){
         return $this->banios;
     }
+    
     public function getHabitaciones(){
         return $this->habitaciones;
     }
+
     public function getVendedores(){
         return $this->vendedores_id;
+    }
+
+    //Sincronizar el objeto en memoria con los cambios realizados por el usuario
+    //Leemos el post y actualizamos el objeto en memoria, aplicamos un principio de active record
+    public function sincronizar($args = []){
+        foreach ($args as $key => $value) {
+            if (property_exists($this, $key) && !is_null($value)) {
+                $this->$key=$value;
+            }
+        }
+
     }
 }
