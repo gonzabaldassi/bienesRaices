@@ -4,6 +4,7 @@
     estaAutenticado();
 
     Use App\Propiedad;
+    use App\Vendedor;
     use Intervention\Image\ImageManagerStatic as Image;
 
     //Validar que el ID que viene en la URL sea valido
@@ -19,8 +20,7 @@
     $propiedad= Propiedad::find($id);
 
     //Consultar para obtener los vendedores
-    $query_vendedores="SELECT * FROM vendedores";
-    $res=mysqli_query($db,$query_vendedores);
+    $vendedores=Vendedor::all();
 
     //Array con mensajes de errores
     $errores = Propiedad::getErrores();
@@ -51,8 +51,11 @@
 
         //Controlamos que no haya errores antes de insertar
         if (empty($errores)) {
-            //Almacenar la imagen
-            $image->save(CARPETA_IMAGENES.$nombreImg);
+
+            if ($_FILES['propiedad']['tmp_name']['imagen']) {
+                //Almacenar la imagen
+                $image->save(CARPETA_IMAGENES.$nombreImg);
+            }
 
             //Update a la base de datos
              $propiedad ->guardar();

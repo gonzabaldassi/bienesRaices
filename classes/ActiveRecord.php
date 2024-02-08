@@ -91,7 +91,7 @@ class ActiveRecord{
     public function atributos(){
         $atributos = [];
         
-        foreach(self::$columnasDB as $col){
+        foreach(static::$columnasDB as $col){
             if ($col === 'id') continue;
             $atributos[$col] = $this -> $col; 
         }
@@ -134,45 +134,13 @@ class ActiveRecord{
     }
 
     //Validación
-    public static function getErrores(){
-        return self::$errores;
+    public function validar(){
+        static::$errores=[];
+        return static::$errores;
     }
 
-    public function validar(){
-        //Verificacion de errores
-        if (!$this->titulo){
-            self::$errores[] = 'Debes añadir un titulo';
-        }
-
-        if (!$this->precio) {
-            self::$errores[] = 'El Precio es obligatorio';
-        }
-
-        if (!$this->imagen) {
-            self::$errores[] = 'La imagen es obligatoria';
-        }
-        
-        if (strlen($this->descripcion)<50) {
-            self::$errores[] = 'La descripción es obligatoria y debe tener al menos 50 caracteres';
-        }
-
-        if (!$this->habitaciones) {
-            self::$errores[] = 'El numero de habitaciones es obligatorio';
-        }
-
-        if (!$this->banios) {
-            self::$errores[] = 'El numero de banios es obligatorio';
-        }
-
-        if (!$this->estacionamiento) {
-            self::$errores[] = 'El numero de lugares de estacionamientos es obligatorio';
-        }
-
-        if (!$this->vendedores_id ) {
-            self::$errores[] = 'Debes seleccionar un vendedor';
-        }
-
-        return self::$errores;
+    public static function getErrores(){
+        return static::$errores;
     }
 
     //Lista todos los registros
@@ -199,7 +167,7 @@ class ActiveRecord{
         //Iterar los resultados y formatear el resultado de arreglo a objeto
         $array = [];
         while($registro = $resultado->fetch_assoc()){
-            $array[] = self::crearObjetos($registro);
+            $array[] = static::crearObjetos($registro); //Static para que el registro que tome sea uno de los hijos y NO la clase padre
         }
 
         //Liberar la memoria
