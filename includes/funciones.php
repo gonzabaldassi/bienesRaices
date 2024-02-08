@@ -39,3 +39,25 @@ function validarTipoContenido($tipo){
     return in_array($tipo,$tipos);//Buscar un string dentro de un arreglo, en este caso busca lo que viene por parametro ($tipo) en el array $tipos
     
 }
+
+function notificar($codigo){
+    $mensaje='';
+    switch ($codigo) {
+        case 1:
+            $mensaje= 'Registrado Correctamente';
+            break;
+        case 2:
+            $mensaje= 'Actualizado Correctamente';
+            break;
+        case 3:
+            $mensaje= 'Eliminado Correctamente';
+            break;
+        
+        default:
+            $mensaje=false;
+            break;
+    }
+
+    return $mensaje;
+
+}
