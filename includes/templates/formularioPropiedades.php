@@ -19,7 +19,7 @@
 </fieldset>
 
 <fieldset>
-    <legend>Informacion Propeidad</legend>
+    <legend>Informacion Propiedad</legend>
 
     <label for="habitaciones">Habitaciones:</label>
     <input type="number" id="habitaciones" placeholder="Ej. 3" min="1" name="propiedad[habitaciones]" value="<?php echo sanitizar($propiedad -> habitaciones); ?>">

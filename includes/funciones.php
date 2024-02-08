@@ -31,3 +31,11 @@ function sanitizar($html) : string{
     $s=htmlspecialchars($html);
     return $s;
 }
+
+//Validar tipo de contenido
+function validarTipoContenido($tipo){
+    $tipos=['vendedor','propiedad'];
+
+    return in_array($tipo,$tipos);//Buscar un string dentro de un arreglo, en este caso busca lo que viene por parametro ($tipo) en el array $tipos
+    
+}
