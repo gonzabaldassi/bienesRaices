@@ -20,5 +20,29 @@ class Vendedor extends ActiveRecord {
 
     }
 
+    public function validar(){
+        //Verificacion de errores
+        if (!$this->nombre){
+            self::$errores[] = 'Debes añadir un nombre';
+        }
+        if (!$this->apellido){
+            self::$errores[] = 'Debes añadir un apellido';
+        }
+
+        if (!$this->telefono){
+            self::$errores[] = 'Debes añadir un teléfono';
+        }
+
+        //Validamos que solo ingresen caracteres numericos mediante una expresión regular.
+        //'/[0-9]{10}/' solo se permiten numeros del 0 al 9 y el tiene que tener una longitud de 10
+        if (!preg_match('/[0-9]{10}/', $this->telefono)) {
+            self::$errores[] = 'El número de telefono debe contener unicamente caracteres numéricos';
+        }
+
+
+
+        return self::$errores;
+    }
+
 
 }

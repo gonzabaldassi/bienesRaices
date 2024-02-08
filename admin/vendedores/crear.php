@@ -15,7 +15,14 @@ $vendedor = new vendedor;
 $errores = Vendedor::getErrores();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (empty($errores)) {}
+    $vendedor = new Vendedor($_POST['vendedor']);
+
+    //Validar que no haya campos vacíos
+    $errores=$vendedor->validar();
+
+    if (empty($errores)) {
+        $vendedor -> guardar();
+    }
 }
 
 incluirTemplate('header');

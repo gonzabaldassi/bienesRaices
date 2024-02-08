@@ -48,12 +48,12 @@
         <h1>Administrador de Bienes Raices</h1>
 
         <?php if(intval($mensaje) === 1):?>
-            <p class="alerta exito">Propiedad Registrada Correctamente</p>
+            <p class="alerta exito">Registrado Correctamente</p>
 
         <?php elseif(intval($mensaje) === 2): ?>
-            <p class="alerta exito">Propiedad Actualizada Correctamente</p>
+            <p class="alerta exito">Actualizado Correctamente</p>
         <?php elseif(intval($mensaje) === 3): ?>
-            <p class="alerta exito">Propiedad Eliminada Correctamente</p>
+            <p class="alerta exito">Eliminado Correctamente</p>
         <?php endif; ?>
 
         <a href="/bienesraices/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
