@@ -3,7 +3,7 @@
         'name' => 'usuario/bienesraices',
         'pretty_version' => 'dev-Aplicacion-MVC',
         'version' => 'dev-Aplicacion-MVC',
-        'reference' => 'a59d61c6adf95e630c76f39a9602215f0b2368fa',
+        'reference' => 'e7ceabe11fcac64611f1fd65ec2df36cc9412fc5',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -70,7 +70,7 @@
         'usuario/bienesraices' => array(
             'pretty_version' => 'dev-Aplicacion-MVC',
             'version' => 'dev-Aplicacion-MVC',
-            'reference' => 'a59d61c6adf95e630c76f39a9602215f0b2368fa',
+            'reference' => 'e7ceabe11fcac64611f1fd65ec2df36cc9412fc5',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
