@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'usuario/bienesraices',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-Aplicacion-MVC',
+        'version' => 'dev-Aplicacion-MVC',
+        'reference' => 'a59d61c6adf95e630c76f39a9602215f0b2368fa',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -68,9 +68,9 @@
             'dev_requirement' => false,
         ),
         'usuario/bienesraices' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-Aplicacion-MVC',
+            'version' => 'dev-Aplicacion-MVC',
+            'reference' => 'a59d61c6adf95e630c76f39a9602215f0b2368fa',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
