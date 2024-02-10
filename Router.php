@@ -30,4 +30,20 @@ class Router{
     public function get($url, $funcion){
         $this->rutasGET[$url]=$funcion;
     }
+
+    //Muestra una vista
+    public function render($view, $data=[]){
+        foreach ($data as $key => $value) {
+            $$key=$value; //El $$ significa variable de variable. Mantiene el nombre pero no pierde el valor. Genera variables con el nombre de los key del arreglo asociativo qeu le estamos pasando por parametro
+        }
+
+        ob_start(); //Iniciamos un almacenamiento en memoria, lo que carguemos no va al navegador, queda en un buffer
+
+        include __DIR__ . "/views/".$view.'.php';
+
+        $contenido = ob_get_clean(); //Limpiamos la memoria y se almacena el include anterior a la variable $contenido
+
+        include __DIR__.'/views/layout.php';
+        
+    }
 }
