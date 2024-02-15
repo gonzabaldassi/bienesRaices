@@ -1,4 +1,6 @@
-<?php 
+<?php
+
+use JetBrains\PhpStorm\Internal\ReturnTypeContract;
 
 define('TEMPLATES_URL', __DIR__.'/templates');
 define('FUNCIONES_URL',__DIR__.'funciones.php');
@@ -62,4 +64,17 @@ function notificar($codigo){
 
     return $mensaje;
 
+}
+
+function validarID(string $url){
+    //Validar que el ID que viene en la URL sea valido
+    $id = $_GET['id'];
+    $id = filter_var($id, FILTER_VALIDATE_INT);
+
+    //Redireccionar si el ID no es valido
+    if (!$id) {
+        header('Location: ${url}');
+    }
+
+    return $id;
 }
