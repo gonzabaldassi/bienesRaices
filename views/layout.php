@@ -28,15 +28,15 @@
         <div class="contenedor contenido-header">
             <div class="barra">
                 <a href="/bienesraices/index.php">
-                    <img src="build/img/logo.svg" alt="Logotipo de bienesraices">
+                    <img src="/build/img/logo.svg" alt="Logotipo de bienesraices">
                 </a>
                 
                 <div class="mobile-menu">
-                    <img src="build/img/barras.svg" alt="Icono menu responsive">
+                    <img src="/build/img/barras.svg" alt="Icono menu responsive">
                 </div>
                 
                 <div class="derecha">
-                    <img src="build/img/dark-mode.svg" alt="Icono de modo oscuro" class="dark-mode-btn">
+                    <img src="/build/img/dark-mode.svg" alt="Icono de modo oscuro" class="dark-mode-btn">
                     <nav class="navegacion">
                         <a href="/bienesraices/nosotros.php">Nosotros</a>
                         <a href="/bienesraices/anuncios.php">Anuncios</a>

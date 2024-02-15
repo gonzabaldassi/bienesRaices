@@ -41,6 +41,7 @@ class Router{
 
         include __DIR__ . "/views/".$view.'.php';
 
+
         $contenido = ob_get_clean(); //Limpiamos la memoria y se almacena el include anterior a la variable $contenido
 
         include __DIR__.'/views/layout.php';

@@ -12,7 +12,7 @@
         ?>
        
         
-        <a href="/bienesraices/admin/propiedades/crear.php" class="boton boton-verde">Nueva Propiedad</a>
+        <a href="/propiedades/crear" class="boton boton-verde">Nueva Propiedad</a>
 
         <h2>Propiedades</h2>
 
