@@ -36,7 +36,7 @@ class Vendedor extends ActiveRecord {
         //Validamos que solo ingresen caracteres numericos mediante una expresión regular.
         //'/[0-9]{10}/' solo se permiten numeros del 0 al 9 y el tiene que tener una longitud de 10
         if (!preg_match('/[0-9]{10}/', $this->telefono)) {
-            self::$errores[] = 'El número de telefono debe contener unicamente caracteres numéricos';
+            self::$errores[] = 'El número de telefono debe contener unicamente caracteres numéricos y una longitud de 10';
         }
 
 

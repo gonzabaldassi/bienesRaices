@@ -10,12 +10,14 @@ class PropiedadController{
     public static function index(Router $router){
         
         $propiedades = Propiedad::all();
+        $vendedores = Vendedor::all();
         //Muestra alerta
         $resultadoAlerta = $_GET['resultado'] ?? null;
         
         $router->render('propiedades/admin', [
             'propiedades'=>$propiedades,
-            'resultadoAlerta'=>$resultadoAlerta
+            'resultadoAlerta'=>$resultadoAlerta,
+            'vendedores'=>$vendedores
         ]);
     }
 
@@ -153,8 +155,6 @@ class PropiedadController{
             }
         }
     }
-
-
     
 }
 
