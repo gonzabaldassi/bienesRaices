@@ -5,8 +5,8 @@
 
     $auth = $_SESSION['login'] ?? false;
 
-    if (isset($inicio)) {
-        $inicio=false;
+    if(!isset($inicio)){
+        $inicio = false;
     }
 
 ?>
@@ -27,7 +27,7 @@
     <header class="header <?php echo $inicio ? 'inicio' : '';?>">
         <div class="contenedor contenido-header">
             <div class="barra">
-                <a href="/bienesraices/index.php">
+                <a href="/">
                     <img src="/build/img/logo.svg" alt="Logotipo de bienesraices">
                 </a>
                 
@@ -38,15 +38,15 @@
                 <div class="derecha">
                     <img src="/build/img/dark-mode.svg" alt="Icono de modo oscuro" class="dark-mode-btn">
                     <nav class="navegacion">
-                        <a href="/bienesraices/nosotros.php">Nosotros</a>
-                        <a href="/bienesraices/anuncios.php">Anuncios</a>
-                        <a href="/bienesraices/blog.php">Blog</a>
-                        <a href="/bienesraices/contacto.php">Contacto</a>
+                        <a href="/nosotros">Nosotros</a>
+                        <a href="/propiedades">Anuncios</a>
+                        <a href="/blog">Blog</a>
+                        <a href="/contacto">Contacto</a>
                         <?php if (!$auth): ?>
-                            <a href="/bienesraices/login.php">Iniciar sesión</a>
+                            <a href="/login">Iniciar sesión</a>
                         <?php endif;?>
                         <?php if ($auth): ?>
-                            <a href="/bienesraices/cerrar-sesion.php">Cerrar sesión</a>
+                            <a href="/cerrar-sesion">Cerrar sesión</a>
                         <?php endif;?>
                     </nav>
                 </div>
