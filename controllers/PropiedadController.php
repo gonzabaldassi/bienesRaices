@@ -8,6 +8,7 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class PropiedadController{
     public static function index(Router $router){
+        
         $propiedades = Propiedad::all();
         //Muestra alerta
         $resultadoAlerta = $_GET['resultado'] ?? null;
@@ -17,6 +18,7 @@ class PropiedadController{
             'resultadoAlerta'=>$resultadoAlerta
         ]);
     }
+
 
     public static function create(Router $router){
         $propiedad = new Propiedad;
@@ -130,6 +132,29 @@ class PropiedadController{
             'errores'=>$errores
         ]);
     }
+
+    public static function delete(){
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' ) {
+            //Validar ID
+            $id = $_POST['id'];
+            $id = filter_var($id, FILTER_VALIDATE_INT);
+    
+            if ($id) {
+    
+                $tipo=$_POST['tipo'];
+    
+                //Validamos que el tipo que viene por POST sea valido
+                if (validarTipoContenido($tipo)) {
+                    $propiedad = Propiedad::find($id);
+
+                    $propiedad->eliminar();
+
+                }
+            }
+        }
+    }
+
+
     
 }
 

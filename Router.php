@@ -5,7 +5,7 @@ namespace MVC;
 class Router{
     public $rutasGET = [];
     public $rutasPOST = [];
-
+    
     //Metodop para verificar si la urlActual es valida y que tipo de accion desea realizar
     public function comprobarRutas(){
         $urlActual = $_SERVER['PATH_INFO'] ?? '/'; //Identifico la URL que estoy visitando mediante la info del server
@@ -14,7 +14,7 @@ class Router{
        if ($metodo === 'GET') {
         $funcion = $this->rutasGET[$urlActual] ?? null;
        }else if ($metodo === 'POST') {
-        $funcion = $this->rutasGET[$urlActual] ?? null;
+        $funcion = $this->rutasPOST[$urlActual] ?? null;
        }
 
        //COndicional que verifica que la URL existe y tiene una funcion asociada
