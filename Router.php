@@ -13,6 +13,8 @@ class Router{
 
        if ($metodo === 'GET') {
         $funcion = $this->rutasGET[$urlActual] ?? null;
+       }else if ($metodo === 'POST') {
+        $funcion = $this->rutasGET[$urlActual] ?? null;
        }
 
        //COndicional que verifica que la URL existe y tiene una funcion asociada
@@ -31,6 +33,12 @@ class Router{
         $this->rutasGET[$url]=$funcion;
     }
 
+    //Metodo para accionar todas las peticiones que vienen con método POST
+    //La clave del arreglo es la direccion y el valor es su funcion
+    public function post($url, $funcion){
+        $this->rutasPOST[$url]=$funcion;
+    }
+
     //Muestra una vista
     public function render($view, $data=[]){
         foreach ($data as $key => $value) {
@@ -40,7 +48,6 @@ class Router{
         ob_start(); //Iniciamos un almacenamiento en memoria, lo que carguemos no va al navegador, queda en un buffer
 
         include __DIR__ . "/views/".$view.'.php';
-
 
         $contenido = ob_get_clean(); //Limpiamos la memoria y se almacena el include anterior a la variable $contenido
 
