@@ -46,7 +46,7 @@
                             <a href="/login">Iniciar sesión</a>
                         <?php endif;?>
                         <?php if ($auth): ?>
-                            <a href="/cerrar-sesion">Cerrar sesión</a>
+                            <a href="/logout">Cerrar sesión</a>
                         <?php endif;?>
                     </nav>
                 </div>

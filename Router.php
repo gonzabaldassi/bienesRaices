@@ -1,5 +1,4 @@
 <?php
-
 namespace MVC;
 
 class Router{
@@ -8,8 +7,17 @@ class Router{
     
     //Metodop para verificar si la urlActual es valida y que tipo de accion desea realizar
     public function comprobarRutas(){
+        //Iniciamos la sesion
+        session_start();
+
+        //Vemos si está o no autenticado
+        $auth= $_SESSION['login'] ?? null;
+
+        //Array de rutas protegidas
+        $rutasProtegidas = ['/admin', '/propiedades/crear', '/propiedades/actualizar', '/propiedades/eliminar', '/vendedores/crear', '/vendedores/actualizar', '/vendedores/eliminar'];
+
         $urlActual = $_SERVER['PATH_INFO'] ?? '/'; //Identifico la URL que estoy visitando mediante la info del server
-        $metodo = $_SERVER['REQUEST_METHOD']; //Identifico si es POST o GET
+        $metodo = $_SERVER['REQUEST_METHOD'];      //Identifico si es POST o GET
 
        if ($metodo === 'GET') {
         $funcion = $this->rutasGET[$urlActual] ?? null;
@@ -17,14 +25,16 @@ class Router{
         $funcion = $this->rutasPOST[$urlActual] ?? null;
        }
 
+       //Proteger las rutas
+       if (in_array($urlActual, $rutasProtegidas) && !$auth) {
+            header('Location: /');
+       }
+
        //COndicional que verifica que la URL existe y tiene una funcion asociada
        if ($funcion) {
         // Funcion que nos permite llamar a una funcion(definida en el controlador), cuando no conocemos su nombre
         call_user_func($funcion, $this); // Le enviamos la funcion relacionada con la URL que visita el user y las rutas, tanto GET como POST
        }else{}
-
-
-
     }
 
     //Metodo para accionar todas las url que vienen con método GET
