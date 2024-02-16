@@ -7,7 +7,35 @@ document.addEventListener('DOMContentLoaded', function() {
 function eventListeners() {
     const mobileMenu = document.querySelector('.mobile-menu');
 
-    mobileMenu.addEventListener('click', navResponsive)
+    mobileMenu.addEventListener('click', navResponsive);
+
+    //Muestra campos condicionales
+    const metodoContacto = document.querySelectorAll('input[name="contacto[contacto]"]');
+    metodoContacto.forEach(input=>input.addEventListener('click',mostrarMetodosContacto));
+}
+
+function mostrarMetodosContacto(e){
+    const contactoDiv = document.querySelector('#contacto');
+
+    if (e.target.value==='telefono') {
+        contactoDiv.innerHTML=`
+        <label for="telefono">Número de teléfono</label>
+        <input type="tel" placeholder="Tu teléfono" id="telefono" name="contacto[telefono]">
+        
+        <p>Elija la fecha y hora para ser contactado</p>
+
+        <label for="fecha">Fecha</label>
+        <input type="date" id="fecha" name="contacto[fecha]">
+
+        <label for="Hora">Hora</label>
+        <input type="time" id="Hora" min="09:00" max="18:00" name="contacto[hora]">
+        `;
+    } else {
+        contactoDiv.innerHTML=`
+        <label for="email">E-mail</label>
+        <input type="email" placeholder="Tu email" id="email" name="contacto[email]" required>
+        `;
+    }
 }
 
 function navResponsive() {
