@@ -12,6 +12,10 @@ function eventListeners() {
     //Muestra campos condicionales
     const metodoContacto = document.querySelectorAll('input[name="contacto[contacto]"]');
     metodoContacto.forEach(input=>input.addEventListener('click',mostrarMetodosContacto));
+
+    const menuActual = window.location.pathname;
+
+    resaltarNav(menuActual);
 }
 
 function mostrarMetodosContacto(e){
@@ -52,6 +56,7 @@ function navResponsive() {
     }
 }
 
+
 function darkMode() {
     const preferencia = window.matchMedia('(prefers-color-scheme: dark)');
 
@@ -74,4 +79,27 @@ function darkMode() {
     btnDarkMode.addEventListener('click', function() {
         document.body.classList.toggle('dark-mode')
     })
+}
+
+function resaltarNav(e){
+    const navegacion = document.querySelector('.navegacion');
+    switch (e) {
+        case '/nosotros':
+            navegacion.querySelector('.nosotros').classList.add('green');
+            break;
+        case '/propiedades':
+            navegacion.querySelector('.propiedades').classList.add('green');
+            break;
+        case '/blog':
+            navegacion.querySelector('.blog').classList.add('green');
+            break;
+        case '/contacto':
+            navegacion.querySelector('.contacto').classList.add('green');
+            break;
+        case '/login':
+            navegacion.querySelector('.login').classList.add('green');
+            break;
+        default:
+            break;
+    }
 }

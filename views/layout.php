@@ -38,12 +38,12 @@
                 <div class="derecha">
                     <img src="/build/img/dark-mode.svg" alt="Icono de modo oscuro" class="dark-mode-btn">
                     <nav class="navegacion">
-                        <a href="/nosotros">Nosotros</a>
-                        <a href="/propiedades">Anuncios</a>
-                        <a href="/blog">Blog</a>
-                        <a href="/contacto">Contacto</a>
+                        <a href="/nosotros" class="nosotros">Nosotros</a>
+                        <a href="/propiedades" class="propiedades">Anuncios</a>
+                        <a href="/blog" class="blog">Blog</a>
+                        <a href="/contacto" class="contacto">Contacto</a>
                         <?php if (!$auth): ?>
-                            <a href="/login">Iniciar sesión</a>
+                            <a href="/login" class="login">Iniciar sesión</a>
                         <?php endif;?>
                         <?php if ($auth): ?>
                             <a href="/logout">Cerrar sesión</a>
