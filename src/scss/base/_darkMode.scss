@@ -1,0 +1,46 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.dark-mode{
+    background-color:darken($color: v.$grisOscuro, $amount: 10) ;
+    p,
+    .texto-nosotros blockquote,
+    table.propiedades td{
+        color: v.$blanco;
+    }
+
+    h1,h2,h3,h4,a{
+        color: v.$gris;
+    }
+
+
+    .card,
+    .resumen-propiedad{
+        background-color: v.$grisOscuro;
+        border: 1px solid v.$grisOscuro;
+
+        .precio{
+            color: v.$verde;
+        }
+
+        .icono{
+            filter: invert(100%);
+        }
+    }
+
+    .formulario{
+        label,
+        legend,
+        p{
+            color: v.$gris;
+        }
+
+        input:not([type="submit"]),
+        textarea,
+        select{
+            background-color: v.$grisOscuro;
+            border: 1px solid v.$grisOscuro;
+            color: v.$blanco;
+        }
+    }
+}

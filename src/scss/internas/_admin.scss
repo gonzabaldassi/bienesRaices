@@ -1,0 +1,78 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.alerta{
+    padding: .5rem;
+    text-align: center;
+    color: v.$blanco;
+    font-weight: v.$bold;
+    text-transform: uppercase;
+    
+    margin: 1rem 0;
+    animation-name: apertura;
+    animation-duration: 600ms;
+    animation-timing-function:ease-out ;
+    
+    &.error{
+        background-color: rgb(187, 36, 36);
+    }
+
+    &.exito{
+        background-color: v.$verde;
+    }
+
+}
+
+@keyframes apertura {
+    from{
+        transform: translateY(10rem);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+table{
+    &.propiedades{
+        margin-top: 4rem;
+        width: 100%;
+        border-spacing: 0;
+    
+        thead{
+            background-color: v.$verde;
+
+            th{
+                color: v.$blanco;
+                padding: 2rem;
+            }
+        }
+
+        tbody{
+
+            td{
+                max-width: 100%;
+                text-align: center;
+                
+                &.acciones{
+                    width: 20rem;
+                }
+
+                img{
+                    margin: auto;
+                }
+            }
+
+
+        }
+
+
+        .imagen-tabla{
+            width: 10rem;
+        }
+
+    }
+
+}

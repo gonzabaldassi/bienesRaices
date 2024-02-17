@@ -1,0 +1,22 @@
+{
+    "name": "usuario/bienesraices",
+    "description": "Agregando POO al proyecto de bienesraices",
+    "type": "project",
+    "authors": [
+        {
+            "name": "Gonzalo Baldassi",
+            "email": "gonzalobaldassi02@gmail.com"
+        }
+    ],
+    "autoload":{
+        "psr-4": {
+            "Model\\": "./models",
+            "MVC\\": "./",
+            "Controllers\\": "./controllers"
+        }
+    },
+    "require": {
+        "intervention/image": "2.7",
+        "phpmailer/phpmailer": "^6.9"
+    }
+}
